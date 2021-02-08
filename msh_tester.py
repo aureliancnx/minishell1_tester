@@ -28,7 +28,12 @@ def exec_process(test, md):
 def start_test(test):
     mrcode, mot = exec_process(test, False)
     trcode, tmot = exec_process(test, True)
-    if mrcode == 139 or mrcode == 11:
+    expcode = test['override_excode']
+    # TODO better code, this is a crappy one
+    if expcode >= 0 and mrcode != expcode:
+        print("Test [{0}]: Test failed.")
+        return False
+    elif expcode < 0 and (mrcode == 139 or mrcode == 1):
         print("Test [{0}]: Test crashed.")
         return False
     if mrcode == -1:
