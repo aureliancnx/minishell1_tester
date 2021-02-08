@@ -10,5 +10,17 @@
         "commands": ["ts/segv"],
         "sleeptime": -1,
         "override_excode": 139
+    },
+    {
+        "name": "Simple exec",
+        "commands": ["id"],
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "Run simple commands",
+        "commands": ["ls -lah /home", "pwd", "id"],
+        "sleeptime": -1,
+        "override_excode": -1
     }
 ]
