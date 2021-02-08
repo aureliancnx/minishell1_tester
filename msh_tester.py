@@ -15,7 +15,8 @@ def exec_process(test, md):
         tst_file.write(bf)
         tst_file.close()
         eproc = subprocess.Popen(("/bin/bash", "-C", "tmp"), stdout=subprocess.PIPE)
-        proc = subprocess.Popen((sys.argv[1]), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=eproc.stdout)
+        exc = sys.argv[1] if not md else "tcsh"
+        proc = subprocess.Popen((exc), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=eproc.stdout)
         proc.wait(10)
         ot = proc.stdout.read()
         print(ot)
