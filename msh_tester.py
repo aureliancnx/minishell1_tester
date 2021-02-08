@@ -34,7 +34,7 @@ def start_test(test):
         print("Test [{0}]: Test failed.")
         return False
     elif expcode < 0 and (mrcode == 139 or mrcode == 1):
-        print("Test [{0}]: Test crashed.")
+        print("Test [{0}]: Test crashed.".format(test['name']))
         return False
     if mrcode == -1:
         print("Test [{0}]: Test failed. Unable to start.".format(test['name']))

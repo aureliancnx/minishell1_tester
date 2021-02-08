@@ -12,14 +12,32 @@
         "override_excode": 139
     },
     {
-        "name": "Simple exec",
+        "name": "Basic tests: Simple exec",
         "commands": ["id"],
         "sleeptime": -1,
         "override_excode": -1
     },
     {
-        "name": "Run simple commands",
+        "name": "Basic tests: Run simple commands",
         "commands": ["ls -lah /home", "pwd", "id"],
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "Path handling: Path 1",
+        "commands": ["ls -lah /home", "setenv fraise desbois", "ts/simple_pathtest"],
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "Path handling: Path 2",
+        "commands": ["ts/simple_pathtest"],
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "Path/env handling: path 3 error handling",
+        "commands": ["echo $fraise"],
         "sleeptime": -1,
         "override_excode": -1
     }
