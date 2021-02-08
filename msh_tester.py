@@ -19,16 +19,22 @@ def exec_process(test, md):
         proc = subprocess.Popen((exc), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=eproc.stdout)
         proc.wait(10)
         ot = proc.stdout.read()
-        print(ot)
         return proc.returncode, ot
     except Exception as e:
         print(e)
         return -1, None
 
 def start_test(test):
-    rcode, ot = exec_process(test, False)
-    if rcode == -1:
-        print("Test [{0}]: Test failed.".format(test['name']))
+    mrcode, mot = exec_process(test, False)
+    trcode, tmot = exec_process(test, True)
+    if mrcode == -1:
+        print("Test [{0}]: Test failed. Unable to start.".format(test['name']))
+        return False
+    if mot != tmot:
+        print("Test [{0}]: Test failed. Difference.".format(test['name']))
+        return False
+    print("Test [{0}]: Test passed.".format(test['name']))
+    return True
 
 def main():
     tests = None
