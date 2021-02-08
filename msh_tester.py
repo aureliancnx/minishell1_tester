@@ -2,19 +2,30 @@ import json
 import subprocess
 import sys
 
-def exec_process(test):
+def exec_process(test, md):
     try:
         cmds = test['commands']
         cmds.insert(0, sys.argv[1])
-        proc = subprocess.Popen(cmds, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
+        bf = ""
+        for cmd in cmds:
+            bf += "echo -e '{0}'\n".format(cmd)
+            if test['sleeptime'] > 0:
+                bf += "sleep {0}\n".format(test['sleeptime'])
+        tst_file = open("tmp", "w")
+        tst_file.write(bf)
+        tst_file.close()
+        eproc = subprocess.Popen(("/bin/bash", "-C", "tmp"), stdout=subprocess.PIPE)
+        proc = subprocess.Popen((sys.argv[1]), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=eproc.stdout)
         proc.wait(10)
-        ot = process.stdout.read()
+        ot = proc.stdout.read()
+        print(ot)
         return proc.returncode, ot
-    except:
+    except Exception as e:
+        print(e)
         return -1, None
 
 def start_test(test):
-    rcode, ot = exec_process(test)
+    rcode, ot = exec_process(test, False)
     if rcode == -1:
         print("Test [{0}]: Test failed.".format(test['name']))
 

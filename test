@@ -1,2 +1,3 @@
 #!/bin/bash
-python3 msh_tester.py mysh
+python3 msh_tester.py ./mysh
+rm -rf tmp
