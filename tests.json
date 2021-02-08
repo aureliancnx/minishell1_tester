@@ -2,6 +2,13 @@
     {
         "name": "Basic tests: empty",
         "commands": [],
-        "sleeptime": -1
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "Basic tests: segv",
+        "commands": ["ts/segv"],
+        "sleeptime": -1,
+        "override_excode": 139
     }
 ]
