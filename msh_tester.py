@@ -40,6 +40,9 @@ def start_test(test):
         print("Test [{0}]: Test failed. Unable to start.".format(test['name']))
         return False
     if mot != tmot:
+        print(mot)
+        print("--------")
+        print(tmot)
         print("Test [{0}]: Test failed. Difference.".format(test['name']))
         return False
     print("Test [{0}]: Test passed.".format(test['name']))
