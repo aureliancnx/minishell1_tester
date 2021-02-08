@@ -20,13 +20,17 @@ def exec_process(test, md):
         proc.wait(10)
         ot = proc.stdout.read()
         return proc.returncode, ot
+    except TimeoutExpired:
+        return 139, None
     except Exception as e:
-        print(e)
         return -1, None
 
 def start_test(test):
     mrcode, mot = exec_process(test, False)
     trcode, tmot = exec_process(test, True)
+    if mrcode == 139 or mrcode == 11:
+        print("Test [{0}]: Test crashed.")
+        return False
     if mrcode == -1:
         print("Test [{0}]: Test failed. Unable to start.".format(test['name']))
         return False
