@@ -24,6 +24,12 @@
         "override_excode": -1
     },
     {
+        "name": "Basic tests: wrong command",
+        "commands": ["exitt"],
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
         "name": "Path handling: Path 1",
         "commands": ["ls -lah /home", "setenv fraise desbois", "ts/simple_pathtest"],
         "sleeptime": -1,
@@ -39,6 +45,24 @@
         "name": "Path/env handling: path 3 error handling",
         "commands": ["echo $fraise"],
         "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "setenv and unsetenv",
+        "commands": ["echo $fraise", "setenv fraise desbois", "echo $fraise", "ts/simple_pathtest", "unsetenv fraise", "ts/simple_pathtest"],
+        "sleeptime": 0.1,
+        "override_excode": -1
+    },
+    {
+        "name": "unsetenv: no args",
+        "commands": ["unsetenv"],
+        "sleeptime": -1,
+        "override_excode": -1
+    },
+    {
+        "name": "setenv: error handling",
+        "commands": ["setenv ok=2", "setenv @PATH 4", "setenv ILOVESTRAWBERRIES ANDYOU YES"],
+        "sleeptime": 0.1,
         "override_excode": -1
     }
 ]
