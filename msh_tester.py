@@ -39,6 +39,9 @@ def start_test(test):
 def main():
     tests = None
 
+    if len(sys.argv) != 2:
+        print("Usage: python msh_tester.py <shell_executable>")
+        return 1
     try:
         fl = open("tests.json")
         cnt = fl.read()
